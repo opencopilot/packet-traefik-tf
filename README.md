@@ -17,14 +17,13 @@ This may be useful for anyone looking for a simple round robin load balancer on 
 
 For more opinionated needs in a traefik load balancer, the `traefik.toml` file lives in `/etc/traefik/traefik.toml` and can be configured however you like.
 
-The goal is to offer a load balancer that "just works" out of the box, but can easily be modified to work with your own automation/config-management.
+The goal is to offer a load balancer that "just works" out of the box, but can easily be modified to work with your own automation/config-management for more opinionated use cases.
 
 
 #### TODO
 - Configuration for sending load balancer access logs somewhere
 - Easier integration with Packet global and public IPs
 - Easier HA setup with Packet BGP for ECMP
-
 
 
 #### Usage
