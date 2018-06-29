@@ -35,7 +35,7 @@ cat > /etc/traefik/traefik.toml <<EOF
   entryPoint = "http"
 [[acme.domains]]
   main = "${main_domain}"
-  sans = ["$PUB_IP", "$PRIV_IP"]
+  sans = []
 [api]
   entryPoint = "traefik"
   dashboard = true
