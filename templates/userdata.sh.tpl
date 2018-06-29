@@ -10,6 +10,7 @@ META_DATA=$(mktemp /tmp/bootstrap_metadata.json.XXX)
 curl -sS metadata.packet.net/metadata > $META_DATA
 
 PRIV_IP=$( cat $META_DATA | jq -r '.network.addresses[] | select(.management == true) | select(.public == false) | select(.address_family == 4) | .address')
+PUB_IP=$( cat $META_DATA | jq -r '.network.addresses[] | select(.management == true) | select(.public == true) | select(.address_family == 4) | .address')
 PACKET_AUTH=${packet_token}
 PACKET_PROJ=${project_id}
 BACKEND_TAG=${backend_tag}
@@ -34,6 +35,7 @@ cat > /etc/traefik/traefik.toml <<EOF
   entryPoint = "http"
 [[acme.domains]]
   main = "${main_domain}"
+  sans = ["$PUB_IP", "$PRIV_IP"]
 [api]
   entryPoint = "traefik"
   dashboard = true
