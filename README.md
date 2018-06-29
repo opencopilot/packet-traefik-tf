@@ -29,7 +29,7 @@ The goal is to offer a load balancer that "just works" out of the box, but can e
 
 #### Usage
 
-```terraform
+```tf
 provider "packet" {
   auth_token = "${var.packet_token}"
 }
