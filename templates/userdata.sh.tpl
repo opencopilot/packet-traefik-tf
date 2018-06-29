@@ -60,4 +60,4 @@ docker run -d \
     -e PACKET_PROJ=$PACKET_PROJ \
     -e BACKEND_TAG=$BACKEND_TAG \
     --restart=always \
-    quay.io/patrickdevivo/traefik-packet
+    quay.io/opencopilot/traefik-packet
