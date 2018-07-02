@@ -4,12 +4,15 @@ This is a terraform module for deploying a standalone [traefik](https://traefik.
 
 The `traefik` dashboard and management endpoint is bound to the private IP of the Packet device (on port `8080`, use the [Packet VPN](https://help.packet.net/technical/infrastructure/doorman-customer-vpn) or an SSH tunnel to access the dashboard.
 
+Any elastic IPs you add to the instance this provisions will be automatically added to the loopback of the host, which `traefik` will listen on. So if you add an elastic Global IP in the Packet portal to this device, the load balancer will be available on that IP automatically.
+
 #### What you get
 - Automatic backend configuration via tags on Packet devices (add/remove backends by adding/removing tags on your Packet device)
 - Automatic `Let's Encrypt` for zero-config SSL termination at the load balancer
 - Traefik dashboard/api exposed on private IP for internal visibility
 - Load balancer metrics exposed on private IP for prometheus scraping
 - Access logs (TODO: will be configurable to be sent to a remote service)
+- Automatic Packet elastic IP set-up, add IPs to the device in the Packet portal and the LB will "just work" on that IP
 
 #### Who is this useful for?
 
@@ -22,7 +25,6 @@ The goal is to offer a load balancer that "just works" out of the box, but can e
 
 #### TODO
 - Configuration for sending load balancer access logs somewhere
-- Easier integration with Packet global and public IPs
 - Easier HA setup with Packet BGP for ECMP
 
 

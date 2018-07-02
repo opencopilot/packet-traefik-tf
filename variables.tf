@@ -13,7 +13,7 @@ variable "facility" {}
 variable "plan" {}
 
 variable "os_version" {
-  default = "coreos_beta"
+  default = "coreos_stable"
 }
 
 variable "lets_encrypt_email" {}

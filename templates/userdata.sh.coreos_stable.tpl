@@ -23,6 +23,7 @@ cat > /etc/traefik/traefik.toml <<EOF
   [entryPoints.https]
   address = ":443"
     [entryPoints.https.tls]
+[retry]
 [acme]
   email = "${lets_encrypt_email}"
   storage = "/etc/traefik/acme.json"
@@ -81,3 +82,23 @@ WantedBy=multi-user.target
 EOF
 sudo systemctl enable /etc/systemd/system/traefik-packet.service
 sudo systemctl start traefik-packet.service
+
+
+# Start Packet IP Sidecar
+cat > /etc/systemd/system/packet-ip-sidecar.service <<EOF
+[Unit]
+Description=Packet IP Sidecar
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/usr/bin/docker pull quay.io/opencopilot/packet-ip-sidecar
+ExecStart=/usr/bin/docker run --name packet-ip-sidecar --net host --privileged quay.io/opencopilot/packet-ip-sidecar
+ExecStop=/usr/bin/docker stop packet-ip-sidecar
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl enable /etc/systemd/system/packet-ip-sidecar.service
+sudo systemctl start packet-ip-sidecar.service

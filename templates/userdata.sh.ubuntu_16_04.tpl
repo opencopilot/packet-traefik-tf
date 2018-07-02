@@ -61,3 +61,10 @@ docker run -d \
     -e BACKEND_TAG=$BACKEND_TAG \
     --restart=always \
     quay.io/opencopilot/traefik-packet
+
+docker run -d \
+  --name packet-ip-sidecar \
+  --net host \
+  --privileged \
+  --restart=always \
+  quay.io/opencopilot/packet-ip-sidecar
