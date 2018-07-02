@@ -16,5 +16,9 @@ variable "os_version" {
   default = "coreos_stable"
 }
 
+variable "hostname" {
+  default = ""
+}
+
 variable "lets_encrypt_email" {}
 variable "main_domain" {}

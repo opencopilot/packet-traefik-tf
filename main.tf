@@ -15,7 +15,7 @@ data "template_file" "init" {
 
 resource "packet_device" "traefik-lb" {
   count            = "${var.count}"
-  hostname         = "prod-${format("traefik-%03d", count.index + 1)}"
+  hostname         = "${var.hostname != "" ? "${var.hostname}" : "prod-${format("traefik-%03d", count.index + 1)}" }"
   plan             = "${var.plan}"
   facility         = "${var.facility}"
   operating_system = "${var.os_version}"
