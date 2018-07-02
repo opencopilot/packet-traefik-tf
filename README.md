@@ -1,6 +1,6 @@
 ### packet-traefik-tf
 
-This is a terraform module for deploying a standalone `[traefik](https://traefik.io/)` load balancer on Packet bare metal. A sidecar container is run which looks for backends via tags on Packet devices and auto-configures `traefik` to route to those devices on port `80` of the private management IP. More flexible configuration will be exposed soon.
+This is a terraform module for deploying a standalone [`traefik`](https://traefik.io/) load balancer on Packet bare metal. A sidecar container is run which looks for backends via tags on Packet devices and auto-configures `traefik` to route to those devices on port `80` of the private management IP. More flexible configuration will be exposed soon.
 
 The `traefik` dashboard and management endpoint is bound to the private IP of the Packet device (on port `8080`, use the [Packet VPN](https://help.packet.net/technical/infrastructure/doorman-customer-vpn) or an SSH tunnel to access the dashboard.
 
