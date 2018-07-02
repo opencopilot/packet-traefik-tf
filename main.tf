@@ -1,5 +1,5 @@
 data "template_file" "init" {
-  template = "${file("${path.module}/templates/userdata.sh.tpl")}"
+  template = "${file("${path.module}/templates/userdata.sh.${var.os_version}.tpl")}"
 
   vars = {
     count        = "${var.count}"
@@ -18,7 +18,7 @@ resource "packet_device" "traefik-lb" {
   hostname         = "prod-${format("traefik-%03d", count.index + 1)}"
   plan             = "${var.plan}"
   facility         = "${var.facility}"
-  operating_system = "ubuntu_16_04"
+  operating_system = "${var.os_version}"
   billing_cycle    = "hourly"
   project_id       = "${var.project_id}"
   tags             = ["traefik-lb"]

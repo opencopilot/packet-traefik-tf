@@ -12,5 +12,9 @@ variable "backend_tag" {
 variable "facility" {}
 variable "plan" {}
 
+variable "os_version" {
+  default = "coreos_beta"
+}
+
 variable "lets_encrypt_email" {}
 variable "main_domain" {}
