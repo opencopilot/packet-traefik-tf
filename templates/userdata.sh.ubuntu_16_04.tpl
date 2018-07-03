@@ -9,8 +9,8 @@ sh get-docker.sh
 META_DATA=$(mktemp /tmp/bootstrap_metadata.json.XXX)
 curl -sS metadata.packet.net/metadata > $META_DATA
 
-PRIV_IP=$( cat $META_DATA | jq -r '.network.addresses[] | select(.management == true) | select(.public == false) | select(.address_family == 4) | .address')
-PUB_IP=$( cat $META_DATA | jq -r '.network.addresses[] | select(.management == true) | select(.public == true) | select(.address_family == 4) | .address')
+PRIV_IP=$( jq -r '.network.addresses[] | select(.management == true) | select(.public == false) | select(.address_family == 4) | .address' $METADATA)
+PUB_IP=$( jq -r '.network.addresses[] | select(.management == true) | select(.public == true) | select(.address_family == 4) | .address' $META_DATA)
 PACKET_AUTH=${packet_token}
 PACKET_PROJ=${project_id}
 BACKEND_TAG=${backend_tag}
