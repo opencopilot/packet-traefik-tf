@@ -94,7 +94,7 @@ Requires=docker.service
 [Service]
 TimeoutStartSec=0
 ExecStartPre=/usr/bin/docker pull quay.io/opencopilot/packet-ip-sidecar
-ExecStart=/usr/bin/docker run --name packet-ip-sidecar --net host --privileged quay.io/opencopilot/packet-ip-sidecar
+ExecStart=/usr/bin/docker run --name packet-ip-sidecar --net host --cap-add NET_ADMIN quay.io/opencopilot/packet-ip-sidecar
 ExecStop=/usr/bin/docker stop packet-ip-sidecar
 
 [Install]

@@ -65,6 +65,6 @@ docker run -d \
 docker run -d \
   --name packet-ip-sidecar \
   --net host \
-  --privileged \
+  --cap-add NET_ADMIN \
   --restart=always \
   quay.io/opencopilot/packet-ip-sidecar
