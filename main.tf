@@ -9,7 +9,6 @@ data "template_file" "init" {
     backend_tag  = "${var.backend_tag}"
 
     lets_encrypt_email = "${var.lets_encrypt_email}"
-    main_domain        = "${var.main_domain}"
   }
 }
 

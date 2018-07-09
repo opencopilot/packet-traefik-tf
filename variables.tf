@@ -35,6 +35,3 @@ variable "hostname" {
 variable "lets_encrypt_email" {
   description = "The email to use for Let's Encrypt"
 }
-variable "main_domain" {
-  description = "Main domain for traefik <> Let's Encrypt integration"
-}
