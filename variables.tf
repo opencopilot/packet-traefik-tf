@@ -35,3 +35,13 @@ variable "hostname" {
 variable "lets_encrypt_email" {
   description = "The email to use for Let's Encrypt"
 }
+
+variable "log_driver" {
+  default = "json-file"
+  description = "Docker logging driver to use"
+}
+
+variable "log_driver_opts" {
+  default = {}
+  description = "Docker logging driver options"
+}

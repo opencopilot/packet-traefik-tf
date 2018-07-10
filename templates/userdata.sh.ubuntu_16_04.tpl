@@ -1,19 +1,26 @@
 #!/bin/sh
 set -x
 
-#### Fetch Metadata ###
+#### Fetch Metadata ####
 META_DATA=$(mktemp /tmp/bootstrap_metadata.json.XXX)
 curl -sS metadata.packet.net/metadata > $META_DATA
 
 PRIV_IP=$(cat $META_DATA | jq -r '.network.addresses[] | select(.management == true) | select(.public == false) | select(.address_family == 4) | .address')
 PUB_IP=$(cat $META_DATA | jq -r '.network.addresses[] | select(.management == true) | select(.public == true) | select(.address_family == 4) | .address')
 DEV_ID=$(cat $META_DATA | jq -r .id)
-SHORT_ID=($${DEV_ID//-/ })
+SHORT_ID=$(echo $DEV_ID | cut -d'-' -f1)
 PACKET_AUTH=${packet_token}
 PACKET_PROJ=${project_id}
 BACKEND_TAG=${backend_tag}
 
 mkdir /etc/traefik
+mkdir /etc/docker
+
+echo '{"log-driver": "${log_driver}"} {"log-opts": ${log_driver_opts}}' | jq -s add >> /etc/docker/daemon.json
+
+#### Install Docker ####
+curl -fsSL get.docker.com -o get-docker.sh
+sh get-docker.sh
 
 # Create Traefik config
 cat > /etc/traefik/traefik.toml <<EOF
