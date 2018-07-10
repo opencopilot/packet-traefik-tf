@@ -8,12 +8,14 @@ Any elastic IPs you add to the instance this provisions will be automatically ad
 
 In order to add hostnames for `Let's Encrypt` certs to "just work," add device tags to the load balancer device that gets provisioned in the format `hostname=www.mydomain.com`. Make sure that your domain has an A record with an IP attached to your LB device (either the public management IP or an attached elastic IP). If the ACME challenge process fails due to a DNS resolution error (you added the A record after adding the device tag), just remove the hostname tag and re-add it. By default, your LB will be accessible at `<device-short-id>.packethost.net` where `<device-short-id>` is the first section (split on `-`) of your Packet device's ID, with a valid cert.
 
+To ship your logs elsewhere, specify a docker logging drive and logging options with the `log_driver` (string) and `log_driver_opts` (map) variables.
+
 #### What you get
 - Automatic backend configuration via tags on Packet devices (add/remove backends by adding/removing tags on your Packet device)
 - Automatic `Let's Encrypt` for zero-config SSL termination at the load balancer. Use device tags to configure what hostnames to generate certificates for
 - `Traefik` dashboard/api exposed on private IP for internal visibility
 - Load balancer metrics exposed on private IP for prometheus scraping
-- Access logs (TODO: will be configurable to be sent to a remote service)
+- Log configuration - ship access/runtime logs to an external service by configuring a docker logging driver
 - Automatic Packet elastic IP set-up, add IPs to the device in the Packet portal and the LB will "just work" on that IP
 
 #### Who is this useful for?
@@ -26,8 +28,9 @@ The goal is to offer a load balancer that "just works" out of the box, but can e
 
 
 #### TODO
-- Configuration for sending load balancer access logs somewhere
 - Easier HA setup with Packet BGP for ECMP
+- Support for weighting backends with device tags
+- Support for specifying backend port to forward
 
 #### Usage
 
@@ -44,6 +47,5 @@ module "packet-lb" {
   facility           = "ewr1"
   plan               = "c1.large"
   lets_encrypt_email = "email@domain.com"
-  main_domain        = "example.com"
 }
 ```
