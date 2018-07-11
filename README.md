@@ -20,7 +20,7 @@ To ship your logs elsewhere, specify a docker logging drive and logging options 
 
 #### Who is this useful for?
 
-This may be useful for anyone looking for a simple round robin load balancer on Packet that can "auto discover" backends based on Packet device tags, with HTTPS, metrics, logs and remote dashboard visibility out of the box. Much of the magic comes from `traefik` itself and it's ease of use with minimal configuration; the sidecar containers are what enables easier integration with Packet.
+This may be useful for anyone looking for a simple round robin load balancer on Packet that can "auto discover" backends based on Packet device tags, with HTTPS, metrics, logs and remote dashboard visibility out of the box. Much of the magic comes from `traefik` itself and it's ease of use with minimal configuration; the sidecar containers are what enable easier integration with Packet.
 
 For more opinionated needs in a `traefik` load balancer, the `traefik.toml` file lives in `/etc/traefik/traefik.toml` and can be configured however you like.
 
